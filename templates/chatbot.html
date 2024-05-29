@@ -1,0 +1,183 @@
+
+    <style>
+        /* Chatbot Container Styles */
+        .chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1; /* Ensure the chat container is above the button */
+        }
+
+        /* Chatbot Header Styles */
+        .chatbot-header {
+            background-color: #25d366;
+            color: #fff;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        /* Chatbot Content Styles */
+        .chatbot-content {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Chat Input Styles */
+        .chat-input-container {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-bottom-left-radius: 10px;
+        }
+
+        /* Send Button Styles */
+        .send-button {
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 0 10px 10px;
+            cursor: pointer;
+        }
+
+        /* Floating Chatbot Button Styles */
+        .floating-chatbot-button {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 2; /* Ensure the button is above the chat container */
+        }
+
+        /* Message Styles */
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .received-message-con {
+            display: flex;
+            justify-content: start;
+            text-align: left;
+        }
+        .received-message {
+            display: block;
+            width: fit-content;
+            background-color: #f5f5f5;
+        }
+        
+        .sent-message-con {
+            display: flex;
+            justify-content: end;
+        }
+        .sent-message {
+            display: block;
+            width: fit-content;
+            background-color: #25d366;
+            color: #fff;
+        }
+        
+    </style>
+
+    <!-- Floating Chatbot Button -->
+    <button class="floating-chatbot-button" id="chatbotButton">SARATHI</button>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <!-- Chatbot Header -->
+        <div class="chatbot-header">
+            Chatbot
+        </div>
+        
+        <!-- Chatbot Content -->
+        <div class="chatbot-content" id="chatContent">
+            <div class="message received-message">
+                <p>Welcome! How can I assist you today?</p>
+            </div>
+
+            <!-- Demo Question and Answer -->
+                <div class="sent-message-con ">
+                    <p class="sent-message message"> what can i choose after my 10th</p>
+                </div>
+                <div class="received-message-con">
+                    <p class="received-message message"> enter number:
+                        1.arts 
+                        2.commerce 
+                        3.science
+                    </p>
+                </div>
+                <!-- <div class="sent-message-con ">
+                    <p class="sent-message message"> arts</p>
+                </div>
+                <div class="received-message-con">
+                    <p class="received-message message"> students can opt for various arts branches, such as humanities or social sciences, to explore subjects like history, literature, sociology, and psychology, fostering a well-rounded education and diverse career opportunities.
+                    </p>
+                </div> -->
+            
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="userInput" placeholder="Type your question here...">
+            <button class="send-button" id="sendMessage">Send</button>
+        </div>
+    </div>
+
+    <!-- JavaScript to toggle the chatbot container and handle user input -->
+    <script>
+        const chatbotButton = document.getElementById('chatbotButton');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatContent = document.getElementById('chatContent');
+        const userInput = document.getElementById('userInput');
+        const sendMessageButton = document.getElementById('sendMessage');
+
+        chatbotButton.addEventListener('click', () => {
+            if(chatbotContainer.style.display == 'block')
+            chatbotContainer.style.display = 'none';
+            else
+            chatbotContainer.style.display = 'block';
+        });
+
+        sendMessageButton.addEventListener('click', () => {
+            const userMessage = userInput.value.trim();
+            if (userMessage !== '') {
+                // Append user message to chat content
+                chatContent.innerHTML += `<div class="sent-message-con"><p class="sent-message message"> ${userMessage}</p></div>`;
+                if(userMessage=='1')
+                chatContent.innerHTML += `<div class="received-message-con">
+                    <p class="received-message message"> students can opt for various arts branches, such as humanities or social sciences, to explore subjects like history, literature, sociology, and psychology, fostering a well-rounded education and diverse career opportunities.
+                    </p>
+                </div>`;
+                // Clear user input
+                userInput.value = '';
+                // You can add logic here to generate and append bot responses based on user input
+            }
+        });
+
+        // Show/hide the chatbot container when clicking outside of it
+        // document.addEventListener('click', (event) => {
+        //     if (event.target !== chatbotButton && event.target !== chatbotContainer) {
+        //         chatbotContainer.style.display = 'none';
+        //     }
+        // });
+    </script>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>General Aptitude Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #quizForm {
+            width: 80%;
+            margin: 0 auto;
+            text-align: left;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: 10px;
+            color: #555;
+        }
+
+        .animated-button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .animated-button:hover {
+            background-color: #0056b3;
+        }
+        .quiz-title{
+            margin-top: 5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+  {% include 'header.html' %}
+    <h1 class="quiz-title">General Aptitude Quiz</h1>
+    <form id="quizForm" action="/test" method="post">
+        <div id="questions">
+            <!-- Questions will be inserted here via JavaScript -->
+        </div>
+        <button type="submit" class="animated-button">Submit</button>
+    </form>
+
+    <script>
+        // Define your questions here
+        const questions = [
+        "How likely are you to take initiative in a team project?",
+        "How likely are you to adapt to changes in a work environment?",
+        "How likely are you to communicate effectively with team members?",
+        "How likely are you to handle stress and pressure?"
+
+        ];
+
+        // Function to generate the quiz form
+        function generateQuiz() {
+            const form = document.getElementById('quizForm');
+            const questionsDiv = document.getElementById('questions');
+
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.innerHTML = `<p>${index + 1}. ${question}</p>
+                    <input type="radio" id="q${index}_a" name="q${index}" value="Less Likely" required>
+                    <label for="q${index}_a">Less Likely</label>
+                    <input type="radio" id="q${index}_b" name="q${index}" value="Likely" required>
+                    <label for="q${index}_b">Likely</label>
+                    <input type="radio" id="q${index}_c" name="q${index}" value="Very Likely" required>
+                    <label for="q${index}_c">Very Likely</label>`
+                    
+
+                questionsDiv.appendChild(questionDiv);
+            });
+        }
+
+        generateQuiz(); // Call the function to generate the quiz form
+    </script>
+
+</body>
+</html>
